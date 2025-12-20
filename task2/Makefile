@@ -1,15 +1,18 @@
-CXX = g++
-CXXFLAGS = -std=c++11 -Wall -Wextra
+CC = g++
+CFLAGS = -std=c++17 -Wall -Wextra -pthread
 LDFLAGS = -lgtest -lgtest_main -pthread
 
-all: run_tests
+all: test_runner
 
-test_runner: SparseVector.cpp test.cpp
-	 $(CXX) $(CXXFLAGS) SparseVector.cpp test.cpp -o test_runner $(LDFLAGS)
+test_runner: test.o SparseVector.o
+	$(CC) $(CFLAGS) -o test_runner test.o SparseVector.o $(LDFLAGS)
 
-run_tests: test_runner
-	 ./test_runner
+test.o: test.cpp SparseVector.h
+	$(CC) $(CFLAGS) -c test.cpp
+
+SparseVector.o: SparseVector.cpp SparseVector.h
+	$(CC) $(CFLAGS) -c SparseVector.cpp
 
 clean:
-	 rm -f test_runner *.o
+	rm -f *.o test_runner
 
