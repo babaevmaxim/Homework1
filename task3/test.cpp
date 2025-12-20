@@ -10,6 +10,7 @@ TEST(HeapTest, IntegersMinHeap) {
     h.insert(5);
     h.insert(20);
     h.insert(2);
+
     EXPECT_EQ(h.extractMin(), 2);
     EXPECT_EQ(h.extractMin(), 5);
     EXPECT_EQ(h.extractMin(), 10);
@@ -21,6 +22,7 @@ TEST(HeapTest, StringsMinHeap) {
     h.insert("banana");
     h.insert("apple");
     h.insert("cherry");
+
     EXPECT_EQ(h.extractMin(), "apple");
     EXPECT_EQ(h.extractMin(), "banana");
     EXPECT_EQ(h.extractMin(), "cherry");
@@ -42,3 +44,4 @@ int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
 }
+
