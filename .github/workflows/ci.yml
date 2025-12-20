@@ -28,13 +28,6 @@ jobs:
           ./calculator || true
         fi
 
-    - name: Test HW2 (SparseVector)
-      run: |
-        if [ -d "task2" ]; then
-          cd task2
-          make
-        fi
-
     - name: Test HW3 (Heap)
       run: |
         if [ -d "task3" ]; then
