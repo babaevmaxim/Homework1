@@ -1,0 +1,44 @@
+name: C++ CI
+
+on:
+  push:
+    branches: [ main, homework-2, homework-3 ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install Google Test
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libgtest-dev cmake
+        cd /usr/src/gtest
+        sudo cmake CMakeLists.txt
+        sudo make
+        sudo cp lib/*.a /usr/lib
+
+    - name: Test HW1 (Calculator)
+      run: |
+        if [ -f Makefile ]; then
+          make
+          ./calculator || true
+        fi
+
+    - name: Test HW2 (SparseVector)
+      run: |
+        if [ -d "task2" ]; then
+          cd task2
+          make
+          ./test_runner
+        fi
+
+    - name: Test HW3 (Heap)
+      run: |
+        if [ -d "task3" ]; then
+          cd task3
+          make
+        fi
